@@ -253,15 +253,13 @@ public class PathDecomposer{
 
   public static void main(String[] args){
     Graph graph = Graph.readGraph(System.in);
-
     Bag whole = new Bag(graph);
     whole.initializeForDecomposition();
+
     PathDecomposer pd = new PathDecomposer(whole);
     pd.decompose(5);
-
     TreeDecomposition path = whole.toTreeDecomposition();
     path.writeTo(System.out);
-
     //randomTest();
   }
 }

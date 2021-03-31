@@ -351,14 +351,19 @@ public class Graph {
     try {
       BufferedReader br = new BufferedReader(new InputStreamReader(is));
       String line = br.readLine();
+      // System.out.println(line);
       while (line.startsWith("c")) {
         line = br.readLine();
       }
       if (line.startsWith("p")) {
         String s[] = line.split(" ");
+        int mode = 0; 
+
         if (!s[1].equals("tw")) {
-          throw new RuntimeException("!!Not treewidth instance");
+          mode = 1;
+          //throw new RuntimeException("!!Not treewidth instance");
         }
+
         int n = Integer.parseInt(s[2]);
         int m = Integer.parseInt(s[3]);
         Graph g = new Graph(n);
@@ -369,9 +374,21 @@ public class Graph {
             line = br.readLine();
           }
           s = line.split(" ");
-          int u = Integer.parseInt(s[0]);
-          int v = Integer.parseInt(s[1]);
-          g.addEdge(u - 1, v - 1);
+          if(mode == 0 && (s.length >= 2)){
+            // System.out.println("Mode 0");
+            // System.out.println(line);
+            int u = Integer.parseInt(s[0]);
+            int v = Integer.parseInt(s[1]);
+            g.addEdge(u - 1, v - 1);
+          }else if(mode == 1 && (s.length >= 3) && line.startsWith("e")){
+            // System.out.println("Mode 1");
+            // System.out.println(line);
+            int u = Integer.parseInt(s[1]);
+            int v = Integer.parseInt(s[2]);
+            g.addEdge(u - 1, v - 1);
+          }else{
+            line = br.readLine(); 
+          }
         }
         return g;
       }
