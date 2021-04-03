@@ -390,6 +390,7 @@ public class Graph {
             line = br.readLine(); 
           }
         }
+        br.close();
         return g;
       }
       else {
